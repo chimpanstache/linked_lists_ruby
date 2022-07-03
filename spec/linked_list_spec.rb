@@ -60,5 +60,35 @@ RSpec.describe LinkedList do
       list.append('2nd node')
       expect(list.tail.value).to eq '2nd node'
     end
-  end  
+  end
+ 
+  describe '#at' do
+
+    context 'list is not empty' do
+      list = LinkedList.new
+
+      list.append('1st node')
+      list.append('2nd node')
+      it 'returns the node at given index in list' do
+        expect(list.at(2).value).to eq '2nd node'
+      end
+    end
+    
+    context 'list is empty' do
+      list = LinkedList.new
+      it 'raises an IndexError' do
+        expect{ list.at(0) }.to raise_error(IndexError)
+      end
+    end    
+
+    context 'index is out of bound' do
+      list = LinkedList.new
+
+      list.append('1st node')
+      list.append('2nd node')
+      it 'raises an IndexError' do
+        expect{ list.at(3) }.to raise_error(IndexError)
+      end
+    end    
+  end
 end
