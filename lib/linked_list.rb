@@ -35,5 +35,12 @@ class LinkedList
     end
     @size += 1
   end
+
+  def at(index)
+    if index > size
+      return nil
+      
+
+  end
 end
 
