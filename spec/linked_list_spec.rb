@@ -45,8 +45,20 @@ RSpec.describe LinkedList do
       expect(list.head).to eq nil
       list.append('1st node')
       expect(list.head.value).to eq '1st node'
-      list.append('2st node')
+      list.append('2nd node')
       expect(list.head.value).to eq '1st node'
+    end
+  end
+
+  describe '#tail' do
+    list = LinkedList.new
+
+    it 'returns the last node in the list' do
+      expect(list.tail).to eq nil
+      list.append('1st node')
+      expect(list.tail.value).to eq '1st node'
+      list.append('2nd node')
+      expect(list.tail.value).to eq '2nd node'
     end
   end  
 end
