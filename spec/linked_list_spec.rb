@@ -37,4 +37,16 @@ RSpec.describe LinkedList do
       expect(list.size).to eq 2
     end
   end
+
+  describe '#head' do
+    list = LinkedList.new
+
+    it 'returns the first node in the list' do
+      expect(list.head).to eq nil
+      list.append('1st node')
+      expect(list.head.value).to eq '1st node'
+      list.append('2st node')
+      expect(list.head.value).to eq '1st node'
+    end
+  end  
 end
