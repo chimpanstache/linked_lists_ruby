@@ -46,5 +46,8 @@ class LinkedList
     end
     ptr
   end
+
+  def pop
+  end
 end
 
