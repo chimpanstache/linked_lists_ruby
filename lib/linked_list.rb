@@ -37,9 +37,7 @@ class LinkedList
   end
 
   def at(index)
-    if index > size
-      raise IndexError.new("Index #{index} outside of list bound 0...#{size - 1}")
-    end
+    raise IndexError.new("Index #{index} outside of list bound 0...#{size - 1}") if index > size
   
     ptr = @head
     while index > 0 do
@@ -47,9 +45,6 @@ class LinkedList
       index -= 1
     end
     ptr
-
-  rescue IndexError => e
-    puts e.message
   end
 end
 

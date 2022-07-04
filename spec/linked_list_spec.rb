@@ -77,7 +77,7 @@ RSpec.describe LinkedList do
     context 'list is empty' do
       list = LinkedList.new
       it 'raises an IndexError' do
-        expect{ list.at(0) }.to raise_error(IndexError)
+        expect(list.at(0)).to be_nil
       end
     end    
 
@@ -87,7 +87,7 @@ RSpec.describe LinkedList do
       list.append('1st node')
       list.append('2nd node')
       it 'raises an IndexError' do
-        expect{ list.at(3) }.to raise_error(IndexError)
+        expect{ list.at(6) }.to raise_error(IndexError)
       end
     end    
   end
