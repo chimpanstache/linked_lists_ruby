@@ -96,23 +96,25 @@ RSpec.describe LinkedList do
   end
 
   describe '#pop' do
-    list = LinkedList.new
+    context 'list is full' do
+      list = LinkedList.new
 
-    list.append('1st node')
-    list.append('2nd node')
-    list.append('3rd node')
+      list.append('1st node')
+      list.append('2nd node')
+      list.append('3rd node')
 
-    it 'removes the last element of the list' do
-      list.pop
-      expect(list.size).to eq 2
-      expect(list.head.value).to be('2nd node')
+      it 'removes the last element of the list' do
+        list.pop
+        expect(list.size).to eq 2
+        expect(list.tail.value).to eq('2nd node')
+      end
     end
 
     context 'on an empty list' do
       list = LinkedList.new
 
-      it 'raises an IndexError' do
-        expect{ list.pop }.to raise_error(IndexError)
+      it 'returns nil' do
+        expect(list.pop).to be_nil
       end
     end
   end

@@ -57,10 +57,15 @@ class LinkedList
   end
 
   def pop
-    # return nil if @size == 0
+    return nil if @size == 0
     
-    # while ptr.next_node != do
-    # @size -= 1
+    ptr = @head
+    while ptr.next_node != @tail do
+      ptr = ptr.next_node
+    end
+
+    @tail = ptr
+    ptr.next_node = @tail
+    @size -= 1
   end
 end
-
