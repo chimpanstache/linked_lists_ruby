@@ -63,20 +63,23 @@ RSpec.describe LinkedList do
   end
  
   describe '#at' do
-
     context 'list is not empty' do
       list = LinkedList.new
 
       list.append('1st node')
       list.append('2nd node')
+      list.append('3rd node')
+
       it 'returns the node at given index in list' do
-        expect(list.at(2).value).to eq '2nd node'
+        expect(list.at(3).value).to eq '3rd node'
+        expect(list.at(-1).value).to eq '3rd node'
+        expect(list.at(-3).value).to eq '1st node'
       end
     end
     
     context 'list is empty' do
       list = LinkedList.new
-      it 'raises an IndexError' do
+      it 'returns nil' do
         expect(list.at(0)).to be_nil
       end
     end    
@@ -86,8 +89,8 @@ RSpec.describe LinkedList do
 
       list.append('1st node')
       list.append('2nd node')
-      it 'raises an IndexError' do
-        expect{ list.at(6) }.to raise_error(IndexError)
+      it 'returns nil' do
+        expect(list.at(6)).to be_nil
       end
     end    
   end

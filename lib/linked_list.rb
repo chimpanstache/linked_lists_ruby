@@ -1,4 +1,5 @@
 require_relative 'node'
+require 'byebug'
 
 class LinkedList
   attr_accessor :size, :head, :tail
@@ -37,17 +38,29 @@ class LinkedList
   end
 
   def at(index)
-    raise IndexError.new("Index #{index} outside of list bound 0...#{size - 1}") if index > size
-  
+    if index >= 0
+      return nil if index > size
+      
+      idx = index
+    else
+      return nil if index.abs > size
+      
+      idx = @size + index + 1
+    end
+    
     ptr = @head
-    while index > 0 do
+    while idx > 1 do
       ptr = ptr.next_node
-      index -= 1
+      idx -= 1
     end
     ptr
   end
 
   def pop
+    # return nil if @size == 0
+    
+    # while ptr.next_node != do
+    # @size -= 1
   end
 end
 
