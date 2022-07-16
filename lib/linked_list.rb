@@ -76,7 +76,6 @@ class LinkedList
 
   def contains?(value)
     ptr = @head
-    byebug
     while ptr != nil do
       return true if value == ptr.value 
       ptr = ptr.next_node
