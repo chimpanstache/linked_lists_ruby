@@ -14,12 +14,12 @@ class LinkedList
     new_node = Node.new(value)
     if @tail.nil?
       @tail = new_node
-      new_node.next_node = @tail
+      new_node.next_node = nil
       @head = new_node
     else
       @tail.next_node = new_node
       @tail = new_node
-      new_node.next_node = @tail
+      new_node.next_node = nil
     end
     @size += 1
   end
@@ -28,7 +28,7 @@ class LinkedList
     new_node = Node.new(value)
     if @head.nil?
       @head = new_node
-      new_node.next_node = @tail
+      new_node.next_node = nil
       @tail = new_node
     else
       new_node.next_node = @head
@@ -72,5 +72,15 @@ class LinkedList
       @tail = ptr
       ptr.next_node = @tail
     end
+  end
+
+  def contains?(value)
+    ptr = @head
+    byebug
+    while ptr != nil do
+      return true if value == ptr.value 
+      ptr = ptr.next_node
+    end
+    false
   end
 end

@@ -138,4 +138,29 @@ RSpec.describe LinkedList do
       end
     end
   end
+
+  describe '#contains?' do
+    context 'when list is empty' do
+      list = LinkedList.new
+      it 'returns false' do
+        expect(list.contains?('value')).to be_falsy
+      end
+    end
+
+    context 'when value is not in the list' do
+      list = LinkedList.new
+      list.append('not_value')
+      it 'returns false' do
+        expect(list.contains?('value')).to be_falsy
+      end
+    end
+
+    context 'when value is in the list' do
+      list = LinkedList.new
+      list.append('value')
+      it 'returns true' do
+        expect(list.contains?('value')).to be_truthy
+      end
+    end
+  end
 end
