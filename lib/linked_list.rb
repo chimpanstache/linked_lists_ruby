@@ -39,11 +39,11 @@ class LinkedList
 
   def at(index)
     if index >= 0
-      return nil if index > size
+      return nil if index > @size
       
       idx = index
     else
-      return nil if index.abs > size
+      return nil if index.abs > @size
       
       idx = @size + index + 1
     end
@@ -56,16 +56,21 @@ class LinkedList
     ptr
   end
 
-  def pop
+  def pop(n = 1)
     return nil if @size == 0
     
-    ptr = @head
-    while ptr.next_node != @tail do
-      ptr = ptr.next_node
+    if n >= @size
+      initialize
+    else
+      ptr = @head
+      @size -= n
+      idx = @size
+      while idx > 1 do
+        ptr = ptr.next_node
+        idx -= 1
+      end
+      @tail = ptr
+      ptr.next_node = @tail
     end
-
-    @tail = ptr
-    ptr.next_node = @tail
-    @size -= 1
   end
 end
