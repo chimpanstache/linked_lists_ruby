@@ -163,4 +163,29 @@ RSpec.describe LinkedList do
       end
     end
   end
+
+  describe '#find' do
+    context 'when list is empty' do
+      list = LinkedList.new
+      it 'returns false' do
+        expect(list.find('value')).to be_falsy
+      end
+    end
+
+    context 'when value is not in the list' do
+      list = LinkedList.new
+      list.append('not_value')
+      it 'returns false' do
+        expect(list.find('value')).to be_falsy
+      end
+    end
+
+    context 'when value is in the list' do
+      list = LinkedList.new
+      list.append('value')
+      it 'returns the index of the corresponding value' do
+        expect(list.find('value')).to eq 1
+      end
+    end
+  end  
 end

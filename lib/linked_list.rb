@@ -82,4 +82,15 @@ class LinkedList
     end
     false
   end
+
+  def find(value)
+    ptr = @head
+    idx = 1
+    while ptr != nil do
+      return idx if value == ptr.value 
+      ptr = ptr.next_node
+      idx += 1
+    end
+    nil
+  end
 end
