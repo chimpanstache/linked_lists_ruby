@@ -93,4 +93,19 @@ class LinkedList
     end
     nil
   end
+
+  def to_s
+    return nil if @size == 0
+    
+    s = ''
+    ptr = @head
+
+    while ptr != nil do
+      s << '( '
+      s << ptr.value.to_s
+      s << ' ) -> '
+      ptr = ptr.next_node
+      return s << 'nil' if ptr.nil? 
+    end
+  end
 end

@@ -188,4 +188,24 @@ RSpec.describe LinkedList do
       end
     end
   end  
+
+  describe '#to_s' do
+    context 'when list is empty' do
+      list = LinkedList.new
+      it 'returns false' do
+        expect(list.to_s).to be_falsy
+      end
+    end
+
+    context 'when list is not empty' do
+      list = LinkedList.new
+      list.append('1st node')
+      list.append('2nd node')
+      list.append('3rd node')
+
+      it 'returns a formatted string' do
+        expect(list.to_s).to eq '( 1st node ) -> ( 2nd node ) -> ( 3rd node ) -> nil'
+      end
+    end
+  end
 end
