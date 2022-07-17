@@ -216,6 +216,7 @@ RSpec.describe LinkedList do
         list.insert_at('1st node', 0)
         expect(list.size).to eq 1
         expect(list.at(1).value).to eq '1st node'
+        expect(list.to_s).to eq '( 1st node ) -> nil'
       end
 
       it 'inserts at the beginning of the list' do
@@ -225,6 +226,7 @@ RSpec.describe LinkedList do
         list.insert_at('0st node', -3)
         expect(list.size).to eq 3
         expect(list.head.value).to eq '0st node'
+        expect(list.to_s).to eq '( 0st node ) -> ( 1st node ) -> ( 2nd node ) -> nil'
       end
     end
 
@@ -236,6 +238,7 @@ RSpec.describe LinkedList do
         list.insert_at('3rd node', 2)
         expect(list.size).to eq 3
         expect(list.tail.value).to eq '3rd node'
+        expect(list.to_s).to eq '( 1st node ) -> ( 2nd node ) -> ( 3rd node ) -> nil'
       end
 
       it 'inserts at the end of the list' do
@@ -245,6 +248,7 @@ RSpec.describe LinkedList do
         list.insert_at('3rd node', -1)
         expect(list.size).to eq 3
         expect(list.tail.value).to eq '3rd node'
+        expect(list.to_s).to eq '( 1st node ) -> ( 2nd node ) -> ( 3rd node ) -> nil'
       end
     end
 
@@ -258,6 +262,7 @@ RSpec.describe LinkedList do
         expect(list.size).to eq 4
         expect(list.tail.value).to eq '3rd node'
         expect(list.at(3).value).to eq '2 & 1/2 node'
+        expect(list.to_s).to eq '( 1st node ) -> ( 2nd node ) -> ( 2 & 1/2 node ) -> ( 3rd node ) -> nil'
       end
 
       it 'inserts in the middle of the list' do
@@ -269,6 +274,7 @@ RSpec.describe LinkedList do
         expect(list.size).to eq 4
         expect(list.tail.value).to eq '3rd node'
         expect(list.at(3).value).to eq '2 & 1/2 node'
+        expect(list.to_s).to eq '( 1st node ) -> ( 2nd node ) -> ( 2 & 1/2 node ) -> ( 3rd node ) -> nil'
       end
     end
     
@@ -280,6 +286,7 @@ RSpec.describe LinkedList do
         expect(list.contains?('other node')).to be_falsy
         expect(list.insert_at('different node', 2)).to eq nil
         expect(list.contains?('different node')).to be_falsy
+        expect(list.to_s).to eq '( 1st node ) -> nil'
       end
     end
   end

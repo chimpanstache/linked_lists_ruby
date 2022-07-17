@@ -132,4 +132,8 @@ class LinkedList
       end
     end
   end
+
+  def remove_at(index)
+    
+  end
 end
