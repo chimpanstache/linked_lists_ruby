@@ -278,15 +278,76 @@ RSpec.describe LinkedList do
       end
     end
     
-    context 'when index is out of the list boundaries' do
-      it 'does not insert' do
+    context 'when several values are inserted' do
+      it 'works well' do
+        list = LinkedList.new
+        list.insert_at('1st node', '2nd node', '3rd node', 0)
+        expect(list.to_s).to eq '( 1st node ) -> ( 2nd node ) -> ( 3rd node ) -> nil'
+        expect(list.size).to eq 3
+        list.insert_at('4th node', '5th node', '6th node', -1)
+        expect(list.to_s).to eq '( 1st node ) -> ( 2nd node ) -> ( 3rd node ) -> ( 4th node ) -> ( 5th node ) -> ( 6th node ) -> nil'
+        expect(list.size).to eq 6
+        list.insert_at('-2nd node', '-1st node', '0th node', -7)
+        expect(list.to_s).to eq '( -2nd node ) -> ( -1st node ) -> ( 0th node ) -> ( 1st node ) -> ( 2nd node ) -> ( 3rd node ) -> ( 4th node ) -> ( 5th node ) -> ( 6th node ) -> nil'
+        expect(list.size).to eq 9
+        list.insert_at('between -2nd and -1st node', 'between -2nd and -1st node', -9)
+        expect(list.to_s).to eq '( -2nd node ) -> ( between -2nd and -1st node ) -> ( between -2nd and -1st node ) -> ( -1st node ) -> ( 0th node ) -> ( 1st node ) -> ( 2nd node ) -> ( 3rd node ) -> ( 4th node ) -> ( 5th node ) -> ( 6th node ) -> nil'
+        expect(list.size).to eq 11
+      end
+    end
+  end
+
+  describe '#remove_at' do
+    context 'when list is empty or index out of bound' do
+
+      it 'does not remove anything' do
+        list = LinkedList.new
+        expect(list.remove_at(2)).to eq nil
+        expect(list.size).to eq 0
+        list.append('1st node')
+        list.append('2nd node')
+        list.append('3rd node')
+        expect(list.remove_at(4)).to eq nil
+        expect(list.to_s).to eq '( 1st node ) -> ( 2nd node ) -> ( 3rd node ) -> nil'
+        expect(list.remove_at(-4)).to eq nil
+        expect(list.to_s).to eq '( 1st node ) -> ( 2nd node ) -> ( 3rd node ) -> nil'
+      end
+    end
+
+    context 'when list size is equal to 1' do
+      it 'empties the list' do
         list = LinkedList.new
         list.append('1st node')
-        expect(list.insert_at('other node', -3)).to eq nil
-        expect(list.contains?('other node')).to be_falsy
-        expect(list.insert_at('different node', 2)).to eq nil
-        expect(list.contains?('different node')).to be_falsy
+        list.remove_at(1)
+        expect(list.size).to eq 0
+        expect(list.to_s).to eq nil
+      end
+    end
+
+    context 'when index is -1 or equal to size' do
+      it 'removes at the end of the list' do
+        list = LinkedList.new
+        list.append('1st node')
+        list.append('2nd node')
+        list.append('3rd node')
+        list.remove_at(-1)
+        expect(list.size).to eq 2
+        expect(list.to_s).to eq '( 1st node ) -> ( 2nd node ) -> nil'
+        list.remove_at(2)
+        expect(list.size).to eq 1
         expect(list.to_s).to eq '( 1st node ) -> nil'
+      end
+    end
+
+    context 'when index is between list boundaries' do
+      it 'removes the corresponding node' do
+        list = LinkedList.new
+        list.append('1st node')
+        list.append('2nd node')
+        list.append('3rd node')
+        list.remove_at(-2)
+        expect(list.size).to eq 2
+        expect(list.to_s).to eq '( 1st node ) -> ( 3rd node ) -> nil'
       end
     end
   end
