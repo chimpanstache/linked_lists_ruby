@@ -110,24 +110,51 @@ class LinkedList
   end
 
   def insert_at(*args, index)
-    ptr = @head
-    
-    if index >= 0
-    
-    else
-      return nil if index.abs > @size + 1
+    byebug
+    return nil if index > @size
 
-      if index.abs == @size + 1
+    if index >= 0
+      if index == 0 # insert at beginning of list
         while !args.empty? do
-          new_node = Node.new(args.last)
-          new_node.next_node = @head
-          @head = new_node
+          prepend(args[-1])
+          args.pop
+        end
+      elsif index == size # insert at end of list
+        while !args.empty? do
+          append(args[0])
+          args.shift
+        end
+      else
+        while !args.empty? do # insert in middle of list
+          new_node = Node.new(args[-1])
+          new_node.next_node = at(index + 1)
+          at(index).next_node = new_node
           args.pop
           @size += 1
         end
       end
+    else
+      return nil if index.abs > @size + 1
 
-      
+      if index.abs == @size + 1 # insert at beginning of list
+        while !args.empty? do
+          prepend(args[-1])
+          args.pop
+        end
+      elsif index == -1 # insert at end of list
+        while !args.empty? do
+          append(args[0])
+          args.shift
+        end
+      else # insert in middle of list
+        while !args.empty? do
+          new_node = Node.new(args[-1])
+          new_node.next_node = at(index + 1)
+          at(index).next_node = new_node
+          args.pop
+          @size += 1
+        end
+      end
     end
   end
 end

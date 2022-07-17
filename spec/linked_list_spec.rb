@@ -208,4 +208,79 @@ RSpec.describe LinkedList do
       end
     end
   end
+
+  describe '#insert_at' do
+    context 'when index is at the beginning of the list' do
+      it 'inserts at the beginning of the list' do
+        list = LinkedList.new
+        list.insert_at('1st node', 0)
+        expect(list.size).to eq 1
+        expect(list.at(1).value).to eq '1st node'
+      end
+
+      it 'inserts at the beginning of the list' do
+        list = LinkedList.new
+        list.append('1st node')
+        list.append('2nd node')
+        list.insert_at('0st node', -3)
+        expect(list.size).to eq 3
+        expect(list.head.value).to eq '0st node'
+      end
+    end
+
+    context 'when index is equal to list size or -1' do
+      it 'inserts at the end of the list' do
+        list = LinkedList.new
+        list.append('1st node')
+        list.append('2nd node')
+        list.insert_at('3rd node', 2)
+        expect(list.size).to eq 3
+        expect(list.tail.value).to eq '3rd node'
+      end
+
+      it 'inserts at the end of the list' do
+        list = LinkedList.new
+        list.append('1st node')
+        list.append('2nd node')
+        list.insert_at('3rd node', -1)
+        expect(list.size).to eq 3
+        expect(list.tail.value).to eq '3rd node'
+      end
+    end
+
+    context 'when index is inside the list boundaries' do
+      it 'inserts in the middle of the list' do
+        list = LinkedList.new
+        list.append('1st node')
+        list.append('2nd node')
+        list.append('3rd node')
+        list.insert_at('2 & 1/2 node', 2)
+        expect(list.size).to eq 4
+        expect(list.tail.value).to eq '3rd node'
+        expect(list.at(3).value).to eq '2 & 1/2 node'
+      end
+
+      it 'inserts in the middle of the list' do
+        list = LinkedList.new
+        list.append('1st node')
+        list.append('2nd node')
+        list.append('3rd node')
+        list.insert_at('2 & 1/2 node', -2)
+        expect(list.size).to eq 4
+        expect(list.tail.value).to eq '3rd node'
+        expect(list.at(3).value).to eq '2 & 1/2 node'
+      end
+    end
+    
+    context 'when index is out of the list boundaries' do
+      it 'does not insert' do
+        list = LinkedList.new
+        list.append('1st node')
+        expect(list.insert_at('other node', -3)).to eq nil
+        expect(list.contains?('other node')).to be_falsy
+        expect(list.insert_at('different node', 2)).to eq nil
+        expect(list.contains?('different node')).to be_falsy
+      end
+    end
+  end
 end
