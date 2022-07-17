@@ -5,20 +5,17 @@ class LinkedList
   attr_accessor :size, :head, :tail
   
   def initialize
-    @head = nil
-    @tail = nil
+    @head = @tail = nil
     @size = 0
   end
 
   def append(value)
     new_node = Node.new(value)
-    if @tail.nil?
-      @tail = new_node
+    if @tail.nil? # empty list
+      @tail = @head = new_node
       new_node.next_node = nil
-      @head = new_node
     else
-      @tail.next_node = new_node
-      @tail = new_node
+      @tail = @tail.next_node = new_node
       new_node.next_node = nil
     end
     @size += 1
@@ -26,10 +23,9 @@ class LinkedList
 
   def prepend(value)
     new_node = Node.new(value)
-    if @head.nil?
-      @head = new_node
+    if @head.nil? # empty list
+      @head = @tail = new_node
       new_node.next_node = nil
-      @tail = new_node
     else
       new_node.next_node = @head
       @head = new_node
@@ -38,13 +34,11 @@ class LinkedList
   end
 
   def at(index)
+    return nil if index.abs > @size
+
     if index >= 0
-      return nil if index > @size
-      
       idx = index
     else
-      return nil if index.abs > @size
-      
       idx = @size + index + 1
     end
     
@@ -101,9 +95,7 @@ class LinkedList
     ptr = @head
 
     while ptr != nil do
-      s << '( '
-      s << ptr.value.to_s
-      s << ' ) -> '
+      s << "( #{ptr.value.to_s} ) -> "
       ptr = ptr.next_node
       return s << 'nil' if ptr.nil? 
     end
@@ -137,8 +129,7 @@ class LinkedList
     return nil if index.abs > @size || @size == 0
     
     if @size == 1
-      @tail = nil
-      @head = nil
+      @tail = @head = nil
     elsif (index.abs == @size && index < 0) || index == 0 # remove at beginning of list
       @head = @head.next_node
     elsif index == -1 || index == size # remove at end of list
