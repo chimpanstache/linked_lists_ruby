@@ -134,6 +134,19 @@ class LinkedList
   end
 
   def remove_at(index)
+    return nil if index.abs > @size || @size == 0
     
+    if @size == 1
+      @tail = nil
+      @head = nil
+    elsif (index.abs == @size && index < 0) || index == 0 # remove at beginning of list
+      @head = @head.next_node
+    elsif index == -1 || index == size # remove at end of list
+      @tail = at(index - 1)
+      at(index - 1).next_node = nil
+    else # remove in middle of list
+      at(index - 1).next_node = at(index + 1)
+    end   
+    @size -= 1
   end
 end
