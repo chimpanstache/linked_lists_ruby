@@ -56,8 +56,8 @@ class LinkedList
     if n >= @size
       initialize
     else
-      ptr = @head
       @size -= n
+      ptr = @head
       idx = @size
       while idx > 1 do
         ptr = ptr.next_node
