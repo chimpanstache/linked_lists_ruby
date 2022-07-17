@@ -108,4 +108,26 @@ class LinkedList
       return s << 'nil' if ptr.nil? 
     end
   end
+
+  def insert_at(*args, index)
+    ptr = @head
+    
+    if index >= 0
+    
+    else
+      return nil if index.abs > @size + 1
+
+      if index.abs == @size + 1
+        while !args.empty? do
+          new_node = Node.new(args.last)
+          new_node.next_node = @head
+          @head = new_node
+          args.pop
+          @size += 1
+        end
+      end
+
+      
+    end
+  end
 end
